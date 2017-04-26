@@ -17,6 +17,9 @@
     display: block;
     text-transform: uppercase;;
     font-weight: bold;
+    @include mediaQuery(3000px, 1200px){
+      font-size: 68px;
+    }
   }
   span.title{
     font-weight: normal;
@@ -40,4 +43,19 @@
   &:nth-child(#{$cols}n){ //last child on each row
     margin-right: 0;
   }
+}
+
+// $arg... lets it pass in list of arguments.
+@mixin mediaQuery($arg...){
+  @if length($arg) == 1{
+    @media screen and (max-width: nth($arg, 1)){
+      @content;
+    }
+  }
+  @if length($arg) == 2{
+    @media screen and (max-width: nth($arg, 1)) and (min-width: nth($arg, 2)){
+      @content;
+    }
+  }
+
 }
